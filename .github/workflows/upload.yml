@@ -30,6 +30,7 @@ jobs:
           REFRESH_TOKEN: ${{ secrets.REFRESH_TOKEN }}
           DRIVE_FOLDER_ID: ${{ secrets.DRIVE_FOLDER_ID }}
           POSTED_FOLDER_ID: ${{ secrets.POSTED_FOLDER_ID }}
+          GITHUB_EVENT_NAME: ${{ github.event_name }}
 
       - name: Save quota
         run: |
