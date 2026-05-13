@@ -101,10 +101,16 @@ function saveQuota(count) {
 // ════════════════════════════════════════════════════════════
 
 async function main() {
-  // Random skip — spreads 5 uploads across the day
-  if (Math.random() > 0.15) {
+  // Manual runs always upload. Scheduled runs get random skip.
+  var isManual = process.env.GITHUB_EVENT_NAME === "workflow_dispatch";
+
+  if (!isManual && Math.random() > 0.15) {
     console.log("Random skip — will try again in 30 minutes.");
     return;
+  }
+
+  if (isManual) {
+    console.log("Manual run — uploading for sure.");
   }
 
   var quota = getQuota();
